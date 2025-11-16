@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Alumnos Room</string>
+    <string name="introduce_tu_nombre">Introduce tu nombre</string>
+    <string name="introduce_tu_nota">Introduce tu nota</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="modificar">Modificar</string>
+    <string name="borrar">Borrar</string>
+    <string name="title_activity_navegacion_alumnos">navegacion_alumnos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

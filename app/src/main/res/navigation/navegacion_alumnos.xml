@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navegacion_alumnos"
+    app:startDestination="@id/listadoAlumnosFragment">
+
+    <fragment
+        android:id="@+id/listadoAlumnosFragment"
+        android:name="com.example.roomsqlite.ui.ListadoAlumnosFragment"
+        android:label="Listado de Alumnos"
+        tools:layout="@layout/fragment_listado_alumnos" >
+        <action
+            android:id="@+id/action_listadoAlumnosFragment_to_nuevoAlumnoFragment"
+            app:destination="@id/nuevoAlumnoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nuevoAlumnoFragment"
+        android:name="com.example.roomsqlite.ui.NuevoAlumnoFragment"
+        android:label="Nuevo Alumno"
+        tools:layout="@layout/fragment_nuevo_alumno" />
+</navigation>
