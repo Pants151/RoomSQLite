@@ -106,7 +106,7 @@ public class ListadoAlumnosFragment extends Fragment {
             return alumnos.get(position);
         }
 
-        // --- ViewHolder ---
+        // ViewHolder
         class AlumnoViewHolder extends RecyclerView.ViewHolder {
             private final ViewholderAlumnoBinding binding;
 
@@ -114,11 +114,11 @@ public class ListadoAlumnosFragment extends Fragment {
                 super(binding.getRoot());
                 this.binding = binding;
 
-                // --- Lógica de botones del ViewHolder ---
+                // Lógica de botones del ViewHolder
 
                 // Botón Modificar
                 binding.btnModificar.setOnClickListener(v -> {
-                    int position = getAdapterPosition();
+                    int position = getBindingAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         try {
                             String nuevoNombre = binding.etNombre.getText().toString();
@@ -131,7 +131,6 @@ public class ListadoAlumnosFragment extends Fragment {
                             }
 
                             // Llamar al ViewModel para actualizar
-                            // [cite: 1038-1040]
                             alumnoViewModel.actualizar(alumno, nuevoNombre, nuevaNota);
                             Toast.makeText(getContext(), "Alumno modificado", Toast.LENGTH_SHORT).show();
 
@@ -143,11 +142,10 @@ public class ListadoAlumnosFragment extends Fragment {
 
                 // Botón Borrar
                 binding.btnBorrar.setOnClickListener(v -> {
-                    int position = getAdapterPosition();
+                    int position = getBindingAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         Alumno alumno = getAlumnoAt(position);
                         // Llamar al ViewModel para eliminar
-                        // [cite: 1035-1037]
                         alumnoViewModel.eliminar(alumno);
                     }
                 });
