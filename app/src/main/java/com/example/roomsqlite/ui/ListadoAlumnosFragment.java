@@ -145,6 +145,7 @@ public class ListadoAlumnosFragment extends Fragment {
                     int position = getBindingAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         Alumno alumno = getAlumnoAt(position);
+
                         // Llamar al ViewModel para eliminar
                         alumnoViewModel.eliminar(alumno);
                     }

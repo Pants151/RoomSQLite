@@ -8,12 +8,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "alumno")
 public class Alumno {
 
-    // [cite: 692, 699]
     @PrimaryKey(autoGenerate = true)
     @NonNull
     int id;
 
-    // [cite: 701]
     @ColumnInfo(name = "nombre")
     String nombre;
 

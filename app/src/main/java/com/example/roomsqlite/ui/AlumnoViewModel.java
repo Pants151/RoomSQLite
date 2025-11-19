@@ -17,19 +17,19 @@ public class AlumnoViewModel extends AndroidViewModel {
 
     public AlumnoViewModel(@NonNull Application application) {
         super(application);
-        alumnosRepositorio = new AlumnosRepositorio(application); // [cite: 848]
+        alumnosRepositorio = new AlumnosRepositorio(application);
     }
 
     public LiveData<List<Alumno>> obtener() {
-        return alumnosRepositorio.obtener(); // [cite: 852]
+        return alumnosRepositorio.obtener();
     }
 
     public void insertar(Alumno a) {
-        alumnosRepositorio.insertar(a); // [cite: 857]
+        alumnosRepositorio.insertar(a);
     }
 
     public void eliminar(Alumno a) {
-        alumnosRepositorio.eliminar(a); // [cite: 860]
+        alumnosRepositorio.eliminar(a);
     }
 
     public void actualizar(Alumno elemento, String nombre, float nota) {
