@@ -1,5 +1,7 @@
 package com.example.roomsqlite.ui;
 
+import android.app.AlertDialog; // Import necesario para el diálogo
+import android.content.Context;  // Import necesario para el contexto
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +53,6 @@ public class ListadoAlumnosFragment extends Fragment {
         binding.recyclerView.setAdapter(adapter);
 
         // Observar la lista de alumnos desde el ViewModel
-
         alumnoViewModel.obtener().observe(getViewLifecycleOwner(), new Observer<List<Alumno>>() {
             @Override
             public void onChanged(List<Alumno> alumnos) {
@@ -59,7 +60,6 @@ public class ListadoAlumnosFragment extends Fragment {
                 adapter.setAlumnos(alumnos);
             }
         });
-
 
         // Navegar a NuevoAlumnoFragment cuando se pulsa el FAB
         binding.irANuevoAlumno.setOnClickListener(v -> {
@@ -71,6 +71,30 @@ public class ListadoAlumnosFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null; // Limpiar la referencia al binding
+    }
+
+    /**
+     * Muestra el diálogo de confirmación antes de borrar un alumno.
+     */
+    private void showDeleteConfirmationDialog(Context context, Alumno a) {
+        new AlertDialog.Builder(context)
+                // Título del diálogo
+                .setTitle("Confirmar Borrado")
+                // Pregunta de comprobación
+                .setMessage("¿Está seguro de borrar este alumno: \"" + a.getNombre() + "\"? Esta acción es irreversible.")
+                // Botón de confirmación (Positivo)
+                .setPositiveButton("Sí, Borrar", (dialog, which) -> {
+                    // Si el usuario hace clic en "Sí, Borrar", ejecutamos la acción
+                    alumnoViewModel.eliminar(a);
+                    Toast.makeText(context, "Alumno '" + a.getNombre() + "' eliminado.", Toast.LENGTH_SHORT).show();
+                })
+                // Botón de cancelación (Negativo)
+                .setNegativeButton("Cancelar", (dialog, which) -> {
+                    // Si el usuario hace clic en "Cancelar", simplemente se cierra el diálogo
+                    dialog.dismiss();
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert) // Icono de alerta
+                .show();
     }
 
     // --- Adapter y ViewHolder como clases internas ---
@@ -118,7 +142,7 @@ public class ListadoAlumnosFragment extends Fragment {
 
                 // Botón Modificar
                 binding.btnModificar.setOnClickListener(v -> {
-                    int position = getBindingAdapterPosition();
+                    int position = getBindingAdapterPosition(); // Usar getBindingAdapterPosition es más seguro en versiones recientes
                     if (position != RecyclerView.NO_POSITION) {
                         try {
                             String nuevoNombre = binding.etNombre.getText().toString();
@@ -146,8 +170,8 @@ public class ListadoAlumnosFragment extends Fragment {
                     if (position != RecyclerView.NO_POSITION) {
                         Alumno alumno = getAlumnoAt(position);
 
-                        // Llamar al ViewModel para eliminar
-                        alumnoViewModel.eliminar(alumno);
+                        // CAMBIO: Ahora llamamos al diálogo en lugar de eliminar directamente
+                        showDeleteConfirmationDialog(binding.getRoot().getContext(), alumno);
                     }
                 });
             }
