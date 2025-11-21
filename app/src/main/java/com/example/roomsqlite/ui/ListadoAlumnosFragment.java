@@ -1,7 +1,7 @@
 package com.example.roomsqlite.ui;
 
-import android.app.AlertDialog; // Import necesario para el diálogo
-import android.content.Context;  // Import necesario para el contexto
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +43,7 @@ public class ListadoAlumnosFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Inicializar NavController y ViewModel (compartido con la Activity)
+        // Inicializar NavController y ViewModel
         navController = Navigation.findNavController(view);
 
         alumnoViewModel = new ViewModelProvider(requireActivity()).get(AlumnoViewModel.class);
@@ -70,7 +70,7 @@ public class ListadoAlumnosFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null; // Limpiar la referencia al binding
+        binding = null;
     }
 
     /**
@@ -142,7 +142,7 @@ public class ListadoAlumnosFragment extends Fragment {
 
                 // Botón Modificar
                 binding.btnModificar.setOnClickListener(v -> {
-                    int position = getBindingAdapterPosition(); // Usar getBindingAdapterPosition es más seguro en versiones recientes
+                    int position = getBindingAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         try {
                             String nuevoNombre = binding.etNombre.getText().toString();
@@ -170,7 +170,6 @@ public class ListadoAlumnosFragment extends Fragment {
                     if (position != RecyclerView.NO_POSITION) {
                         Alumno alumno = getAlumnoAt(position);
 
-                        // CAMBIO: Ahora llamamos al diálogo en lugar de eliminar directamente
                         showDeleteConfirmationDialog(binding.getRoot().getContext(), alumno);
                     }
                 });
